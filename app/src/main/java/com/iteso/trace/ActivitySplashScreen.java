@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -51,10 +50,15 @@ public class ActivitySplashScreen extends AppCompatActivity {
         }
     };
     private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
+    /**
+     * Application startup runnable
+     */
+    private static final int UI_STARTUP_DELAY = 1000;
+    private final Handler mStartupHandler = new Handler();
+    private final Runnable mStartupRunnable = new Runnable() {
         @Override
         public void run() {
-            hide();
+            // TODO: Start application
         }
     };
 
@@ -79,16 +83,11 @@ public class ActivitySplashScreen extends AppCompatActivity {
 
         // Hide controls by default
         hide();
-    }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        //delayedHide(100);
+        // Schedule application startup, cancelling any
+        // previously scheduled calls.
+        mStartupHandler.removeCallbacks(mStartupRunnable);
+        mStartupHandler.postDelayed(mStartupRunnable, UI_STARTUP_DELAY);
     }
 
     private void toggle() {
@@ -123,14 +122,5 @@ public class ActivitySplashScreen extends AppCompatActivity {
         // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
-    /**
-     * Schedules a call to hide() in delay milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 }
