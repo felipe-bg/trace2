@@ -14,10 +14,15 @@
         <activity
             android:name=".ActivityMain"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivitySplashScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+g
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
