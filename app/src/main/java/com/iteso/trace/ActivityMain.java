@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -85,16 +84,8 @@ public class ActivityMain extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        // TODO: Here goes drawer options
-        Toast.makeText(this, "TapInDrawer: " +
-                item.getOrder() + "G:" + item.getGroupId(), Toast.LENGTH_SHORT).show();
-
-        Intent magicalIntent = item.getIntent();
-        startActivity(magicalIntent);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        // New conversation selected in Navigation Drawer
+        startActivity(item.getIntent());
         return true;
     }
 
