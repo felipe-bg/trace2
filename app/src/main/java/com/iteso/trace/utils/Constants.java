@@ -23,5 +23,7 @@ public class Constants {
     // NavigationDrawer menu group ids
     public static final int CHANNELS_GROUP = 0;
     public static final int CHATS_GROUP = 1;
+    // Error message
+    public static final String EMAIL_ERROR = "There was a problem with your input or the database.";
 
 }

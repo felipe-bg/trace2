@@ -274,7 +274,8 @@ public class ActivitySplashScreen extends AppCompatActivity {
                                     .setValue(true);
                             // Add user to emails list removing the dot from the email
                             appDatabase.getReference(DB_EMAILS).child(firebaseUser.getEmail().replace(".", ""))
-                                    .setValue(firebaseUser.getUid());
+                                    .child(firebaseUser.getUid())
+                                    .setValue(true);
                         }
                         // Start main activity with user's active chat
                         Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);

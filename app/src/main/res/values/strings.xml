@@ -35,6 +35,14 @@
 
     <!-- Members -->
     <string name="activity_channel_members_title">Members</string>
+    <string name="menu_activity_member_add">Add member</string>
 
+    <!-- Add user -->
+    <string name="activity_add_people_title">Add people</string>
+    <string name="activity_add_people_username_description">Enter the username you want to add to the channel.</string>
+    <string name="activity_add_people_username_hint">Email…</string>
+    <string name="activity_add_people_add_to_list">Add to list</string>
+    <string name="activity_add_people_add_to_channel">Add to channel</string>
+    <string name="activity_add_people_button">Add to channel</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.iteso.trace;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.ChildEventListener;
@@ -19,6 +22,7 @@ import com.iteso.trace.beans.User;
 import java.util.ArrayList;
 
 import static com.iteso.trace.utils.Constants.CONVERSATION_ID;
+import static com.iteso.trace.utils.Constants.DB_CHANNELS;
 import static com.iteso.trace.utils.Constants.DB_MEMBERS;
 import static com.iteso.trace.utils.Constants.DB_USERS;
 
@@ -54,6 +58,29 @@ public class ActivityMembers extends AppCompatActivity {
         members = new ArrayList<>();
         // Load member data
         loadMembers();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_members, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.menu_activity_channel_members_add:
+                Intent intent = new Intent(ActivityMembers.this, ActivityAddPeople.class);
+                intent.putExtra(CONVERSATION_ID, conversationId);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

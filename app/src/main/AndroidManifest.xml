@@ -29,7 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityUserProfile" />
-        <activity android:name=".ActivityMembers"></activity>
+        <activity android:name=".ActivityMembers" />
+        <activity android:name=".ActivityAddPeople"></activity>
     </application>
 
 </manifest>
