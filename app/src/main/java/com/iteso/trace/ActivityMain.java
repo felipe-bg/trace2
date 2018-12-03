@@ -42,6 +42,7 @@ import java.util.HashMap;
 import static com.iteso.trace.utils.Constants.CHANNELS_GROUP;
 import static com.iteso.trace.utils.Constants.CHATS_GROUP;
 import static com.iteso.trace.utils.Constants.CONVERSATION_ID;
+import static com.iteso.trace.utils.Constants.CURRENT_CONVERSATION;
 import static com.iteso.trace.utils.Constants.DB_CHANNELS;
 import static com.iteso.trace.utils.Constants.DB_CHATS;
 import static com.iteso.trace.utils.Constants.DB_MEMBERS;
@@ -94,6 +95,8 @@ public class ActivityMain extends AppCompatActivity
         messageInput = findViewById(R.id.message_input_text);
         // Setup Fresco
         Fresco.initialize(this);
+        // Set current conversation in user's node
+        setUserCurrentChannel(conversationId);
     }
 
     @Override
@@ -408,5 +411,10 @@ public class ActivityMain extends AppCompatActivity
                     .child(conversationId).push();
             newMessageReference.setValue(newMessage);
         }
+    }
+
+    private void setUserCurrentChannel(String currentConversationId) {
+        appDatabase.getReference(DB_USERS).child(loggedUser.getUid()).child(CURRENT_CONVERSATION)
+                .setValue(currentConversationId);
     }
 }

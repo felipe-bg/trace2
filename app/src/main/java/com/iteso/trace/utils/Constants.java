@@ -25,5 +25,7 @@ public class Constants {
     public static final int CHATS_GROUP = 1;
     // Error message
     public static final String EMAIL_ERROR = "There was a problem with your input or the database.";
+    // Current conversation user property
+    public static final String CURRENT_CONVERSATION = "currentConversation";
 
 }
