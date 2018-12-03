@@ -2,8 +2,57 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_activity_channel_title"
+        android:title="@string/menu_activity_channel_title"
+        app:showAsAction="always" />
+
+    <item
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title="@string/action_directory"
+        app:showAsAction="always">
+
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <item
+                android:id="@+id/menu_activity_channel_members"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="@string/action_directory"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/menu_activity_channel_settings"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/action_settings"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/menu_activity_channel_snooze"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_notifications_black_24dp"
+                android:title="@string/action_snooze"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/menu_activity_channel_add_people"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_person_add_black_24dp"
+                android:title="@string/action_add_people"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/menu_activity_channel_edit_profile"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_edit_black_24dp"
+                android:title="@string/action_edit_profile"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/menu_activity_channel_logout"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/action_logout"
+                app:showAsAction="never" />
+        </menu>
+
+
+    </item>
 </menu>
