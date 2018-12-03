@@ -45,4 +45,12 @@
     <string name="activity_add_people_add_to_channel">Add to channel</string>
     <string name="activity_add_people_button">Add to channel</string>
 
+    <!-- Create channel -->
+    <string name="activity_create_channel_title">Create channel</string>
+    <string name="create_channel_button">Create channel</string>
+    <string name="activity_create_channel_description">Add a name and a description for the channel.</string>
+    <string name="activity_create_channel_placeholder_name">Name…</string>
+    <string name="activity_create_channel_placeholder_description">Description…</string>
+
+
 </resources>
