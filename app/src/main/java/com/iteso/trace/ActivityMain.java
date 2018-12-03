@@ -121,9 +121,9 @@ public class ActivityMain extends AppCompatActivity
         appDatabase.getReference(DB_USERS).child(loggedUser.getUid()).child(DB_CHANNELS)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
-                    public void onChildAdded(@NonNull DataSnapshot channelSnapshot, @Nullable String s) {
+                    public void onChildAdded(@NonNull DataSnapshot userChannelSnapshot, @Nullable String s) {
                         // Read Channel information
-                        appDatabase.getReference(DB_CHANNELS).child(channelSnapshot.getKey())
+                        appDatabase.getReference(DB_CHANNELS).child(userChannelSnapshot.getKey())
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
