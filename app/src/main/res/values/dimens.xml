@@ -8,4 +8,6 @@
 
     <!-- Message layout -->
     <dimen name="datetime_padding">10dp</dimen>
+    <dimen name="message_avatar_margin">10dp</dimen>
+    <dimen name="message_text_padding">10dp</dimen>
 </resources>

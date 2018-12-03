@@ -24,4 +24,10 @@
     <string name="chat_message_hint">Message…</string>
     <string name="send">Send</string>
 
+    <!-- Message placeholders -->
+    <string name="username">Username</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="message">Message</string>
+
+
 </resources>

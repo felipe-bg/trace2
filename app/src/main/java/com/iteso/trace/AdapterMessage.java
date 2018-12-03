@@ -2,6 +2,7 @@ package com.iteso.trace;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.iteso.trace.beans.Message;
 
 import java.text.DateFormat;
@@ -56,7 +58,9 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageV
         }
         holder.timestampText.setText(DateFormat.getDateInstance().format(messageDate));
         holder.usernameText.setText(currentMessage.getUserUid()); //TODO: GET NAME IF 0 IS TRACE
-        holder.avatar.setImageResource(R.drawable.trace_icon_fore);
+        Uri uri = Uri.parse("https://s3.amazonaws.com/cc-698969-mobile/avatars/cat.png");
+        holder.avatar.setImageURI(uri);
+
         holder.avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +81,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageV
         public TextView messageText;
         public TextView timestampText;
         public TextView usernameText;
-        public ImageView avatar;
+        public SimpleDraweeView avatar;
         public MessageViewHolder(View itemView) {
             super(itemView);
             messageText = itemView.findViewById(R.id.message_text);

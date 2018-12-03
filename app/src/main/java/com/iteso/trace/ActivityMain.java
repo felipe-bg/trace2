@@ -18,6 +18,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -91,6 +92,8 @@ public class ActivityMain extends AppCompatActivity
         loadMessages();
         // Setup message input
         messageInput = findViewById(R.id.message_input_text);
+        // Setup Fresco
+        Fresco.initialize(this);
     }
 
     @Override
