@@ -22,18 +22,6 @@
                 android:title="@string/action_directory"
                 app:showAsAction="never" />
             <item
-                android:id="@+id/menu_activity_channel_settings"
-                android:orderInCategory="100"
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/action_settings"
-                app:showAsAction="never" />
-            <item
-                android:id="@+id/menu_activity_channel_snooze"
-                android:orderInCategory="100"
-                android:icon="@drawable/ic_notifications_black_24dp"
-                android:title="@string/action_snooze"
-                app:showAsAction="never" />
-            <item
                 android:id="@+id/menu_activity_channel_add_people"
                 android:orderInCategory="100"
                 android:icon="@drawable/ic_person_add_black_24dp"

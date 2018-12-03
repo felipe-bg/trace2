@@ -1,6 +1,7 @@
 package com.iteso.trace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,14 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iteso.trace.beans.User;
+import com.iteso.trace.beans.UserId;
 
 import java.util.ArrayList;
 
+import static com.iteso.trace.utils.Constants.USER_ID;
+
 public class AdapterMember extends RecyclerView.Adapter<AdapterMember.MemberViewHolder> {
-    private ArrayList<User> members;
+    private ArrayList<UserId> members;
     private Context context;
 
-    public AdapterMember(ArrayList<User> members, Context context) {
+    public AdapterMember(ArrayList<UserId> members, Context context) {
         this.members = members;
         this.context = context;
     }
@@ -33,13 +37,15 @@ public class AdapterMember extends RecyclerView.Adapter<AdapterMember.MemberView
 
     @Override
     public void onBindViewHolder(@NonNull MemberViewHolder holder, int position) {
-        final User currentUser = members.get(position);
+        final UserId currentUser = members.get(position);
         holder.username.setText(currentUser.getDisplayName());
         holder.avatar.setImageResource(R.drawable.trace_icon_fore);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: SEND TO PROFILE
+                Intent intent = new Intent(context, ActivityUserProfile.class);
+                intent.putExtra(USER_ID, currentUser.getUserUId());
+                context.startActivity(intent);
             }
         });
     }

@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.iteso.trace.beans.User;
+import com.iteso.trace.beans.UserId;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,7 @@ public class ActivityMembers extends AppCompatActivity {
     /**
      * Conversation messages list.
      */
-    private ArrayList<User> members;
+    private ArrayList<UserId> members;
     /**
      * Members RecyclerView.
      */
@@ -121,12 +122,23 @@ public class ActivityMembers extends AppCompatActivity {
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        final String currentUserUId = dataSnapshot.getKey();
                         appDatabase.getReference(DB_USERS)
                                 .child(dataSnapshot.getKey())
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        members.add(dataSnapshot.getValue(User.class));
+                                        User u = dataSnapshot.getValue(User.class);
+                                        // Copy to another class because we need the Id
+                                        UserId userId = new UserId();
+                                        userId.setUserUId(currentUserUId);
+                                        userId.setDisplayName(u.getDisplayName());
+                                        userId.setEmail(u.getEmail());
+                                        userId.setCurrentConversation(u.getCurrentConversation());
+                                        userId.setAvatar(u.getAvatar());
+                                        userId.setChannels(u.getChannels());
+                                        userId.setChats(u.getChats());
+                                        members.add(userId);
                                         mAdapter.notifyItemInserted(members.size() - 1);
                                         // Scroll RecyclerView to show new member
                                         if (mRecyclerView != null) {

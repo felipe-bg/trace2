@@ -133,13 +133,10 @@ public class ActivityMain extends AppCompatActivity
                 intent.putExtra(CONVERSATION_ID, conversationId);
                 startActivity(intent);
                 break;
-            case R.id.menu_activity_channel_settings:
-                break;
-            case R.id.menu_activity_channel_snooze:
-                break;
             case R.id.menu_activity_channel_add_people:
-                //intent = new Intent(ActivityMain.this, ActivityAddPeople.class);
-                //startActivity(intent);
+                intent = new Intent(ActivityMain.this, ActivityAddPeople.class);
+                intent.putExtra(CONVERSATION_ID, conversationId);
+                startActivity(intent);
                 break;
             case R.id.menu_activity_channel_edit_profile:
                 //intent = new Intent(ActivityMain.this, ActivityUserProfileEdit.class);
@@ -350,8 +347,9 @@ public class ActivityMain extends AppCompatActivity
                         mRecyclerView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mRecyclerView.smoothScrollToPosition(
-                                        mRecyclerView.getAdapter().getItemCount() - 1);
+                                int newPosition = mRecyclerView.getAdapter().getItemCount() - 1;
+                                if (newPosition < 0) newPosition = 0;
+                                mRecyclerView.smoothScrollToPosition(newPosition);
                             }
                         }, 100);
                     }
