@@ -259,15 +259,15 @@ public class ActivitySplashScreen extends AppCompatActivity {
                             // Add message to database
                             welcomeMsgRef.setValue(welcomeMessage);
                             // Create new user and add it to the database
-                            User newUser = new User();
-                            newUser.setDisplayName(firebaseUser.getDisplayName());
-                            newUser.setEmail(firebaseUser.getEmail());
-                            newUser.setCurrentConversation(defaultChannelRef.getKey());
-                            newUser.setAvatar(DEFAULT_USER_AVATAR);
-                            newUser.getChannels().put(defaultChannelRef.getKey(), true);
+                            currentUser = new User();
+                            currentUser.setDisplayName(firebaseUser.getDisplayName());
+                            currentUser.setEmail(firebaseUser.getEmail());
+                            currentUser.setCurrentConversation(defaultChannelRef.getKey());
+                            currentUser.setAvatar(DEFAULT_USER_AVATAR);
+                            currentUser.getChannels().put(defaultChannelRef.getKey(), true);
                             // Add user to database
                             appDatabase.getReference(DB_USERS).child(firebaseUser.getUid())
-                                    .setValue(newUser);
+                                    .setValue(currentUser);
                             // Add user to channel's member list
                             appDatabase.getReference(DB_MEMBERS).child(defaultChannelRef.getKey())
                                     .child(firebaseUser.getUid())
