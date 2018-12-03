@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 import static com.iteso.trace.utils.Constants.CONVERSATION_ID;
+import static com.iteso.trace.utils.Constants.DB_CHANNELS;
 import static com.iteso.trace.utils.Constants.DB_CHATS;
 import static com.iteso.trace.utils.Constants.DB_EMAILS;
 import static com.iteso.trace.utils.Constants.DB_MEMBERS;
@@ -62,7 +63,7 @@ public class ActivityAddPeople extends AppCompatActivity {
                                 appDatabase.getReference(DB_MEMBERS).child(conversationId)
                                         .child(userUid).setValue(true);
                                 // Add it to the user's channels list
-                                appDatabase.getReference(DB_USERS).child(userUid).child(DB_CHATS)
+                                appDatabase.getReference(DB_USERS).child(userUid).child(DB_CHANNELS)
                                         .child(conversationId).setValue(true);
                                 finish();
                             }
