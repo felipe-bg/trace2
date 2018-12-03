@@ -6,4 +6,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Default channel information -->
+    <string name="default_channel_name">General</string>
+    <string name="default_channel_description">General channel.</string>
+    <string name="welcome_message">Welcome to your first channel!</string>
+
 </resources>
