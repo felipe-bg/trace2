@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,6 +60,8 @@ public class ActivityMembers extends AppCompatActivity {
         members = new ArrayList<>();
         // Load member data
         loadMembers();
+        // Setup Fresco
+        Fresco.initialize(this);
     }
 
     @Override
@@ -108,8 +111,9 @@ public class ActivityMembers extends AppCompatActivity {
                         mRecyclerView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mRecyclerView.smoothScrollToPosition(
-                                        mRecyclerView.getAdapter().getItemCount() - 1);
+                                int newPosition = mRecyclerView.getAdapter().getItemCount() - 1;
+                                if (newPosition < 0) newPosition = 0;
+                                mRecyclerView.smoothScrollToPosition(newPosition);
                             }
                         }, 100);
                     }
@@ -130,6 +134,9 @@ public class ActivityMembers extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         User u = dataSnapshot.getValue(User.class);
                                         // Copy to another class because we need the Id
+                                        // A more elegant solution would be to wrap the user class
+                                        // in a class that contains the Id, instead of repeating
+                                        // properties.
                                         UserId userId = new UserId();
                                         userId.setUserUId(currentUserUId);
                                         userId.setDisplayName(u.getDisplayName());

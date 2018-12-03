@@ -2,6 +2,7 @@ package com.iteso.trace;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,8 @@ public class AdapterMember extends RecyclerView.Adapter<AdapterMember.MemberView
     public void onBindViewHolder(@NonNull MemberViewHolder holder, int position) {
         final UserId currentUser = members.get(position);
         holder.username.setText(currentUser.getDisplayName());
-        holder.avatar.setImageResource(R.drawable.trace_icon_fore);
+        Uri uri = Uri.parse("https://s3.amazonaws.com/cc-698969-mobile/avatars/cat.png");
+        holder.avatar.setImageURI(uri);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
