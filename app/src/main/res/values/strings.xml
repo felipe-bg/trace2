@@ -29,5 +29,8 @@
     <string name="timestamp">Timestamp</string>
     <string name="message">Message</string>
 
+    <!-- User profile -->
+    <string name="activity_user_profile_text_view_name">Username</string>
+    <string name="activity_user_profile_button_send">Send Direct Message</string>
 
 </resources>

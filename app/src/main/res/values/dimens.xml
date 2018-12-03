@@ -10,4 +10,16 @@
     <dimen name="datetime_padding">10dp</dimen>
     <dimen name="message_avatar_margin">10dp</dimen>
     <dimen name="message_text_padding">10dp</dimen>
+
+    <!-- Dimens for user profile activity -->
+    <dimen name="activity_user_profile_title_size">30dp</dimen>
+    <dimen name="activity_user_profile_title_margin">8dp</dimen>
+    <dimen name="activity_user_profile_cardview_width">340dp</dimen>
+    <dimen name="activity_user_profile_cardview_height">100dp</dimen>
+    <dimen name="activity_user_profile_relative_height">405dp</dimen>
+    <dimen name="activity_user_profile_linear_height">350dp</dimen>
+    <dimen name="activity_user_profile_imageview_margintop">65dp</dimen>
+    <dimen name="activity_user_profile_cardview_marginTop">300dp</dimen>
+    <dimen name="profile_avatar_size">150dp</dimen>
+
 </resources>
