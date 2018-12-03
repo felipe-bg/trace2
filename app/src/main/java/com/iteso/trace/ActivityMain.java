@@ -14,6 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -24,6 +27,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iteso.trace.beans.Channel;
 import com.iteso.trace.beans.User;
+import com.iteso.trace.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,9 +84,47 @@ public class ActivityMain extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_activity_channel_title) {
-            return true;
+        Intent intent;
+
+        switch(id){
+            case R.id.menu_activity_channel_title:
+                //intent = new Intent(ActivityMain.this, ActivityChannelDetails.class);
+                //intent.putExtra(Constants.CURRENT_CHANNEL, currentChannelO);
+                //startActivityForResult(intent, Constants.CHANNEL_EDIT_CODE);
+                break;
+            case R.id.menu_activity_channel_members:
+                //intent = new Intent(ActivityMain.this, ActivityMembers.class);
+                //intent.putExtra(Constants.CONVERSATION_ID, conversationId);
+                //intent.putExtra(Constants.CHANNEL_ID, currentChannelO.getChannelId());
+                //startActivity(intent);
+                break;
+            case R.id.menu_activity_channel_settings:
+                break;
+            case R.id.menu_activity_channel_snooze:
+                break;
+            case R.id.menu_activity_channel_add_people:
+                //intent = new Intent(ActivityMain.this, ActivityAddPeople.class);
+                //startActivity(intent);
+                break;
+            case R.id.menu_activity_channel_edit_profile:
+                //intent = new Intent(ActivityMain.this, ActivityUserProfileEdit.class);
+                //intent.putExtra(Constants.CURRENT_USER, user);
+                //startActivity(intent);
+                break;
+            case R.id.menu_activity_channel_logout:
+                // Logout from Firebase
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // Return to splash screen
+                                Intent intent = new Intent(ActivityMain.this, ActivitySplashScreen.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        });
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
