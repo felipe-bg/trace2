@@ -27,9 +27,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iteso.trace.beans.Channel;
 import com.iteso.trace.beans.User;
-import com.iteso.trace.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.iteso.trace.utils.Constants.CHANNELS_GROUP;
