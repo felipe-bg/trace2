@@ -272,8 +272,8 @@ public class ActivitySplashScreen extends AppCompatActivity {
                             appDatabase.getReference(DB_MEMBERS).child(defaultChannelRef.getKey())
                                     .child(firebaseUser.getUid())
                                     .setValue(true);
-                            // Add user to emails list
-                            appDatabase.getReference(DB_EMAILS).child(newUser.getEmail())
+                            // Add user to emails list removing the dot from the email
+                            appDatabase.getReference(DB_EMAILS).child(firebaseUser.getEmail().replace(".", ""))
                                     .setValue(firebaseUser.getUid());
                         }
                         // Start main activity with user's active chat
