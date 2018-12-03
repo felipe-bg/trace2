@@ -20,13 +20,20 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iteso.trace.beans.Channel;
+import com.iteso.trace.beans.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.iteso.trace.utils.Constants.CHANNELS_GROUP;
 import static com.iteso.trace.utils.Constants.CHATS_GROUP;
 import static com.iteso.trace.utils.Constants.CONVERSATION_ID;
 import static com.iteso.trace.utils.Constants.DB_CHANNELS;
+import static com.iteso.trace.utils.Constants.DB_CHATS;
+import static com.iteso.trace.utils.Constants.DB_MEMBERS;
 import static com.iteso.trace.utils.Constants.DB_USERS;
 
 public class ActivityMain extends AppCompatActivity
@@ -107,10 +114,9 @@ public class ActivityMain extends AppCompatActivity
         // Set Container for contents of drawer within a NavigationView
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        // Load Channels
+        // Load Channels and Chats to Navigation Drawer
         loadUserChannels(navigationView.getMenu().getItem(CHANNELS_GROUP).getSubMenu());
-        navigationView.getMenu().getItem(CHATS_GROUP).getSubMenu().add(CHATS_GROUP,Menu.NONE, Menu.NONE,"MyChatT2");
-        navigationView.getMenu().getItem(CHATS_GROUP).getSubMenu().add(CHATS_GROUP,Menu.NONE, Menu.NONE,"MyChatT3");
+        loadUserChats(navigationView.getMenu().getItem(CHATS_GROUP).getSubMenu());
     }
 
     /**
@@ -135,6 +141,80 @@ public class ActivityMain extends AppCompatActivity
                                         intent.putExtra(CONVERSATION_ID, dataSnapshot.getKey());
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         menuItem.setIntent(intent);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    /**
+     * Gets user chats from database and adds them to the submenu.
+     * @param chatsSubmenu Submenu where the chats will be placed.
+     */
+    private void loadUserChats(final SubMenu chatsSubmenu) {
+        appDatabase.getReference(DB_USERS).child(loggedUser.getUid()).child(DB_CHATS)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot userChatSnapshot, @Nullable String s) {
+                        // Read Chat information from Members to get the name of the interlocutor
+                        appDatabase.getReference(DB_MEMBERS).child(userChatSnapshot.getKey())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        // https://firebase.google.com/docs/reference/android/com/google/firebase/database/GenericTypeIndicator
+                                        GenericTypeIndicator<HashMap<String, Boolean>> t = new GenericTypeIndicator<HashMap<String, Boolean>>() {};
+                                        HashMap<String, Boolean> participants = dataSnapshot.getValue(t);
+                                        // Set menuItem intent to go to a fresh new conversation
+                                        final Intent intent = new Intent(ActivityMain.this, ActivityMain.class);
+                                        intent.putExtra(CONVERSATION_ID, dataSnapshot.getKey());
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        // The name to be shown is the first conversation participant that isn't yourself
+                                        for (String userUid : participants.keySet()) {
+                                            if (!userUid.equals(loggedUser.getUid())) {
+                                                // Get display name for this user from database
+                                                appDatabase.getReference(DB_USERS).child(userUid)
+                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                User u = dataSnapshot.getValue(User.class);
+                                                                MenuItem menuItem = chatsSubmenu.add(CHANNELS_GROUP,Menu.NONE, Menu.NONE,u.getDisplayName());
+                                                                menuItem.setIcon(R.drawable.ic_person_black_24dp);
+                                                                menuItem.setIntent(intent);
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+                                                break; // Exit loop
+                                            }
+                                        }
                                     }
 
                                     @Override
