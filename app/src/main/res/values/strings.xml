@@ -33,4 +33,8 @@
     <string name="activity_user_profile_text_view_name">Username</string>
     <string name="activity_user_profile_button_send">Send Direct Message</string>
 
+    <!-- Members -->
+    <string name="activity_channel_members_title">Members</string>
+
+
 </resources>

@@ -4,6 +4,7 @@
     package="com.iteso.trace">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,7 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityUserProfile"></activity>
+        <activity android:name=".ActivityUserProfile" />
+        <activity android:name=".ActivityMembers"></activity>
     </application>
 
 </manifest>

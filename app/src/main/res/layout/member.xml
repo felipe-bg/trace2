@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/channel_member_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/activity_channel_member_vertical_margin"
+    android:background="@drawable/rectangle_background"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:adjustViewBounds="true"
+        android:id="@+id/channel_member_avatar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:scaleType="fitStart"
+        android:src="@android:drawable/ic_menu_compass"/>
+
+    <TextView
+        android:id="@+id/channel_member_username"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/activity_channel_member_height"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:layout_weight="0.8"
+        android:text="Member displayName"/>
+
+</LinearLayout>

@@ -129,10 +129,9 @@ public class ActivityMain extends AppCompatActivity
                 //startActivityForResult(intent, Constants.CHANNEL_EDIT_CODE);
                 break;
             case R.id.menu_activity_channel_members:
-                //intent = new Intent(ActivityMain.this, ActivityMembers.class);
-                //intent.putExtra(Constants.CONVERSATION_ID, conversationId);
-                //intent.putExtra(Constants.CHANNEL_ID, currentChannelO.getChannelId());
-                //startActivity(intent);
+                intent = new Intent(ActivityMain.this, ActivityMembers.class);
+                intent.putExtra(CONVERSATION_ID, conversationId);
+                startActivity(intent);
                 break;
             case R.id.menu_activity_channel_settings:
                 break;
