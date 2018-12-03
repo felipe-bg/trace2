@@ -13,8 +13,9 @@ public class Constants {
     public static final String DB_TAGS = "tags";
     // Database log tag
     public static final String RTDB_LOG = "RTDB_LOG";
-    // Conversation id intent extra name
+    // Intent extras IDs
     public static final String CONVERSATION_ID = "conversationId";
+    public static final String USER_ID = "userId";
     // Default user id
     public static final String DEFAULT_USER_UID = "0";
     public static final String DEFAULT_USER_AVATAR = "https://s3.amazonaws.com/cc-698969-mobile/avatars/cat.png";
