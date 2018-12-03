@@ -141,6 +141,11 @@ public class ActivityMain extends AppCompatActivity
                 intent.putExtra(CONVERSATION_ID, conversationId);
                 startActivity(intent);
                 break;
+            case R.id.menu_activity_channel_create_channel:
+                intent = new Intent(ActivityMain.this, ActivityCreateChannel.class);
+                intent.putExtra(CONVERSATION_ID, conversationId);
+                startActivity(intent);
+                break;
             case R.id.menu_activity_channel_edit_profile:
                 //intent = new Intent(ActivityMain.this, ActivityUserProfileEdit.class);
                 //intent.putExtra(Constants.CURRENT_USER, user);

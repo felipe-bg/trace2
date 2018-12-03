@@ -28,6 +28,12 @@
                 android:title="@string/action_add_people"
                 app:showAsAction="never" />
             <item
+                android:id="@+id/menu_activity_channel_create_channel"
+                android:orderInCategory="100"
+                android:icon="@drawable/ic_add_black_24dp"
+                android:title="@string/action_create_channel"
+                app:showAsAction="never" />
+            <item
                 android:id="@+id/menu_activity_channel_edit_profile"
                 android:orderInCategory="100"
                 android:icon="@drawable/ic_edit_black_24dp"

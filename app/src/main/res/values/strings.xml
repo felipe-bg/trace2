@@ -17,6 +17,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_snooze">Snooze</string>
     <string name="action_add_people">Add People</string>
+    <string name="action_create_channel">Create Channel</string>
     <string name="action_edit_profile">Edit Profile</string>
     <string name="action_logout">Logout</string>
 
