@@ -20,4 +20,8 @@
     <string name="action_edit_profile">Edit Profile</string>
     <string name="action_logout">Logout</string>
 
+    <!-- Message text input -->
+    <string name="chat_message_hint">Message…</string>
+    <string name="send">Send</string>
+
 </resources>

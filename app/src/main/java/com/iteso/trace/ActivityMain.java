@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.EditText;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
@@ -33,6 +35,7 @@ import com.iteso.trace.beans.Message;
 import com.iteso.trace.beans.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import static com.iteso.trace.utils.Constants.CHANNELS_GROUP;
@@ -66,6 +69,10 @@ public class ActivityMain extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    /**
+     * Input text area
+     */
+    private EditText messageInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,8 @@ public class ActivityMain extends AppCompatActivity
         messages = new ArrayList<>();
         // Load messages
         loadMessages();
+        // Setup message input
+        messageInput = findViewById(R.id.message_input_text);
     }
 
     @Override
@@ -381,5 +390,23 @@ public class ActivityMain extends AppCompatActivity
 
                     }
                 });
+    }
+
+    public void hitSend(View v) {
+        if (!messageInput.getText().toString().isEmpty()) {
+            // Get typed message and user
+            Message newMessage = new Message();
+            newMessage.setMessage(messageInput.getText().toString());
+            newMessage.setTimestamp(new Date().toString());
+            newMessage.setUserUid(loggedUser.getUid());
+
+            // Clear EditText
+            messageInput.getText().clear();
+
+            // Get new child with push() (generates unique ID)
+            DatabaseReference newMessageReference = appDatabase.getReference(DB_MESSAGES)
+                    .child(conversationId).push();
+            newMessageReference.setValue(newMessage);
+        }
     }
 }

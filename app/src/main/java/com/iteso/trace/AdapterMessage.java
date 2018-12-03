@@ -55,7 +55,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageV
             messageDate = new Date();
         }
         holder.timestampText.setText(DateFormat.getDateInstance().format(messageDate));
-        holder.usernameText.setText(currentMessage.getUserUid()); //TODO: GET NAME
+        holder.usernameText.setText(currentMessage.getUserUid()); //TODO: GET NAME IF 0 IS TRACE
         holder.avatar.setImageResource(R.drawable.trace_icon_fore);
         holder.avatar.setOnClickListener(new View.OnClickListener() {
             @Override
