@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.iteso.trace.beans.Message;
+import com.iteso.trace.beans.MessageName;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,10 +26,10 @@ import static com.iteso.trace.utils.Constants.USER_ID;
 
 public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageViewHolder> {
     // RecyclerView info: https://developer.android.com/guide/topics/ui/layout/recyclerview
-    private ArrayList<Message> messages;
+    private ArrayList<MessageName> messages;
     private Context context; // Needed for intents to other activities
 
-    public AdapterMessage(ArrayList<Message> messages, Context context) {
+    public AdapterMessage(ArrayList<MessageName> messages, Context context) {
         this.messages = messages;
         this.context = context;
     }
@@ -46,7 +47,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageV
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        final Message currentMessage = messages.get(position);
+        final MessageName currentMessage = messages.get(position);
         holder.messageText.setText(currentMessage.getMessage());
         // Parse date
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));
@@ -57,7 +58,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MessageV
             messageDate = new Date();
         }
         holder.timestampText.setText(DateFormat.getDateInstance().format(messageDate));
-        holder.usernameText.setText(currentMessage.getUserUid()); //TODO: GET NAME IF 0 IS TRACE
+        holder.usernameText.setText(currentMessage.getUsername());
         Uri uri = Uri.parse("https://s3.amazonaws.com/cc-698969-mobile/avatars/cat.png");
         holder.avatar.setImageURI(uri);
 

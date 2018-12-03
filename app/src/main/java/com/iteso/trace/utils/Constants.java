@@ -27,5 +27,7 @@ public class Constants {
     public static final String EMAIL_ERROR = "There was a problem with your input or the database.";
     // Current conversation user property
     public static final String CURRENT_CONVERSATION = "currentConversation";
+    // Application name
+    public static final String TRACE = "Trace";
 
 }

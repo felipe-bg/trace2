@@ -33,6 +33,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iteso.trace.beans.Channel;
 import com.iteso.trace.beans.Message;
+import com.iteso.trace.beans.MessageName;
 import com.iteso.trace.beans.User;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ import static com.iteso.trace.utils.Constants.DB_CHATS;
 import static com.iteso.trace.utils.Constants.DB_MEMBERS;
 import static com.iteso.trace.utils.Constants.DB_MESSAGES;
 import static com.iteso.trace.utils.Constants.DB_USERS;
+import static com.iteso.trace.utils.Constants.TRACE;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,7 +66,7 @@ public class ActivityMain extends AppCompatActivity
     /**
      * Conversation messages list.
      */
-    private ArrayList<Message> messages;
+    private ArrayList<MessageName> messages;
     /**
      * Messages RecyclerView.
      */
@@ -370,12 +372,36 @@ public class ActivityMain extends AppCompatActivity
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        messages.add(dataSnapshot.getValue(Message.class));
-                        mAdapter.notifyItemInserted(messages.size() - 1);
-                        // Scroll RecyclerView to show new message
-                        if (mRecyclerView != null) {
-                            mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
-                        }
+                        final Message m = dataSnapshot.getValue(Message.class);
+                        appDatabase.getReference(DB_USERS).child(m.getUserUid())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String username;
+                                        if (dataSnapshot.exists()) {
+                                            User u = dataSnapshot.getValue(User.class);
+                                            username = u.getDisplayName();
+                                        } else {
+                                            username = TRACE;
+                                        }
+                                        MessageName messageName = new MessageName();
+                                        messageName.setMessage(m.getMessage());
+                                        messageName.setTimestamp(m.getTimestamp());
+                                        messageName.setUserUid(m.getUserUid());
+                                        messageName.setUsername(username);
+                                        messages.add(messageName);
+                                        mAdapter.notifyItemInserted(messages.size() - 1);
+                                        // Scroll RecyclerView to show new message
+                                        if (mRecyclerView != null) {
+                                            mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                     }
 
                     @Override
