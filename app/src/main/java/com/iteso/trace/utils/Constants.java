@@ -19,5 +19,8 @@ public class Constants {
     public static final String DEFAULT_USER_UID = "0";
     public static final String DEFAULT_USER_AVATAR = "https://s3.amazonaws.com/cc-698969-mobile/avatars/cat.png";
     public static final String DEFAULT_TAG = "random";
+    // NavigationDrawer menu group ids
+    public static final int CHANNELS_GROUP = 0;
+    public static final int CHATS_GROUP = 1;
 
 }
